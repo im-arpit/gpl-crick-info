@@ -12,18 +12,18 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: white;
-  background: #020617;
+  background:#020617;
+  color:white;
   overflow-x:hidden;
 }
 
-/* BACKGROUND GLOW */
+/* GLOW BG */
 body::before {
   content:"";
   position:fixed;
   width:600px;
   height:600px;
-  background: radial-gradient(circle, rgba(250,204,21,0.2), transparent);
+  background: radial-gradient(circle, rgba(250,204,21,0.15), transparent);
   top:-200px;
   left:-200px;
   z-index:-1;
@@ -33,11 +33,9 @@ body::before {
 header {
   display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:20px 40px;
   position:absolute;
   width:100%;
-  z-index:10;
 }
 
 header img { height:50px; }
@@ -48,8 +46,6 @@ nav a {
   text-decoration:none;
   opacity:0.8;
 }
-
-nav a:hover { opacity:1; }
 
 /* HERO */
 .hero {
@@ -63,19 +59,9 @@ nav a:hover { opacity:1; }
   text-align:center;
 }
 
-.hero h1 {
-  font-size:3.2rem;
-  font-weight:600;
-}
-
-.hero p {
-  margin:20px 0;
-  color:#cbd5f5;
-}
-
-.highlight {
-  color:#facc15;
-}
+.hero h1 { font-size:3rem; }
+.hero p { margin:20px 0; color:#cbd5f5; }
+.highlight { color:#facc15; }
 
 /* BUTTON */
 .cta-btn {
@@ -84,31 +70,25 @@ nav a:hover { opacity:1; }
   padding:14px 30px;
   border-radius:40px;
   border:none;
-  font-weight:600;
   cursor:pointer;
-  transition: all 0.3s ease;
-  animation: float 3s ease-in-out infinite;
+  transition:0.3s;
+  animation: float 3s infinite;
 }
 
 .cta-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(250,204,21,0.5);
+  transform:scale(1.05);
+  box-shadow:0 10px 30px rgba(250,204,21,0.5);
 }
 
-/* FLOAT */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
 }
 
 /* SECTION */
-.section {
-  padding:80px 20px;
-  text-align:center;
-}
+.section { padding:80px 20px; text-align:center; }
 
-/* GLASS CARD */
+/* FORM */
 .form-container {
   max-width:500px;
   margin:auto;
@@ -116,10 +96,8 @@ nav a:hover { opacity:1; }
   backdrop-filter: blur(15px);
   padding:30px;
   border-radius:15px;
-  border:1px solid rgba(255,255,255,0.1);
 }
 
-/* INPUT */
 input, textarea {
   width:100%;
   padding:12px;
@@ -132,37 +110,34 @@ input, textarea {
 
 input:focus, textarea:focus {
   outline:none;
-  box-shadow: 0 0 0 2px #facc15;
+  box-shadow:0 0 0 2px #facc15;
 }
 
-/* ANNOUNCEMENT */
-.announcement {
-  margin-top:20px;
-  font-size:1.2rem;
+/* COUNTDOWN */
+.countdown {
+  font-size:1.5rem;
+  margin-top:15px;
   color:#facc15;
+}
+
+/* FADE */
+.fade {
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+.fade.show {
+  opacity:1;
+  transform:translateY(0);
 }
 
 /* FOOTER */
 footer {
-  padding:20px;
   text-align:center;
-  font-size:12px;
+  padding:20px;
   opacity:0.6;
 }
 
-/* FADE ANIMATION */
-.fade {
-  opacity:0;
-  transform: translateY(40px);
-  transition: all 1s ease;
-}
-
-.fade.show {
-  opacity:1;
-  transform: translateY(0);
-}
-
-/* MOBILE */
 @media(max-width:768px){
   .hero h1 { font-size:2rem; }
 }
@@ -189,10 +164,12 @@ footer {
 <section id="nominate" class="section fade">
   <h2>Nominate a Captain</h2>
 
-  <form class="form-container" action="https://formspree.io/f/xeepqygr" method="POST" onsubmit="showConfetti()">
+  <form class="form-container"
+        action="https://formspree.io/f/xeepqygr"
+        method="POST"
+        onsubmit="triggerConfetti()">
 
     <input type="hidden" name="_redirect" value="https://your-username.github.io/gpl-captain-site/thankyou.html">
-    <input type="hidden" name="_subject" value="New GPL Captain Nomination">
 
     <input type="text" name="nominee_name" placeholder="Nominee Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
@@ -205,41 +182,65 @@ footer {
 
 <section id="captains" class="section fade">
   <h2>Captains Announcement</h2>
-  <p class="announcement">Captains will be announced soon 🎉</p>
+  <p>Captains will be announced soon 🎉</p>
+
+  <div class="countdown" id="countdown"></div>
 </section>
 
 <footer>
-  © GPL Tournament | Powered by Golden Eagle 🦅
+  © GPL Tournament | Golden Eagle 🦅
 </footer>
+
+<!-- CONFETTI LIB -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
 // smooth scroll
 function scrollToForm() {
-  document.getElementById("nominate").scrollIntoView({ behavior: "smooth" });
+  document.getElementById("nominate").scrollIntoView({ behavior:"smooth" });
 }
 
-// fade in
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
-    }
+// fade animation
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("show");
   });
 });
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 
-document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+// CONFETTI (FULL SCREEN PARTY)
+function triggerConfetti() {
+  const duration = 2000;
+  const end = Date.now() + duration;
 
-// confetti
-function showConfetti() {
-  const confetti = document.createElement("div");
-  confetti.innerHTML = "🎉🎉🎉";
-  confetti.style.position = "fixed";
-  confetti.style.top = "50%";
-  confetti.style.left = "50%";
-  confetti.style.fontSize = "40px";
-  document.body.appendChild(confetti);
-  setTimeout(() => confetti.remove(), 1500);
+  (function frame() {
+    confetti({ particleCount: 6, angle: 60, spread: 80, origin: { x: 0 } });
+    confetti({ particleCount: 6, angle: 120, spread: 80, origin: { x: 1 } });
+
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
 }
+
+// FORM RESET
+window.addEventListener("pageshow", () => {
+  document.querySelector("form")?.reset();
+});
+
+// COUNTDOWN (set your date)
+const targetDate = new Date();
+targetDate.setDate(targetDate.getDate() + 5);
+
+setInterval(()=>{
+  const now = new Date();
+  const diff = targetDate - now;
+
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+
+  document.getElementById("countdown").innerText =
+    `${d}d ${h}h ${m}m remaining`;
+},1000);
 </script>
 
 </body>
