@@ -8,86 +8,120 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
   font-family: 'Libre Baskerville', serif;
-  background: linear-gradient(to right, #0f2027, #2c5364);
   color: white;
+  background: #0f172a;
 }
 
+/* HEADER */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  position:absolute;
+  width:100%;
+  z-index:10;
+}
+
+header img {
+  height:50px;
 }
 
 nav a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-  font-size: 14px;
+  margin-left:20px;
+  color:white;
+  text-decoration:none;
 }
 
+/* HERO */
 .hero {
-  text-align: center;
-  padding: 100px 20px;
+  height:100vh;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+              url('./assets/hero.jpg') center/cover;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size:3.5rem;
+}
+
+.hero span {
+  color:#facc15;
 }
 
 .hero p {
-  margin: 20px 0;
-  font-size: 1.2rem;
+  margin:20px 0;
+  font-size:1.2rem;
 }
 
-button {
-  background: #ff9800;
-  border: none;
-  padding: 15px 25px;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
+.cta-btn {
+  background:#facc15;
+  color:black;
+  padding:15px 30px;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
+  border:none;
 }
 
+/* SECTION */
 .section {
-  padding: 60px 20px;
-  text-align: center;
+  padding:80px 20px;
+  text-align:center;
 }
 
+/* FORM */
 .form-container {
-  max-width: 500px;
-  margin: auto;
-  background: rgba(255,255,255,0.1);
-  padding: 25px;
-  border-radius: 10px;
+  max-width:500px;
+  margin:auto;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  padding:30px;
+  border-radius:15px;
 }
 
 input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: none;
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
 }
 
+/* CAPTAINS */
+.cards {
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.card {
+  background:rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:12px;
+  width:200px;
+}
+
+/* FOOTER */
 footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 12px;
+  padding:20px;
+  text-align:center;
+  font-size:12px;
+  opacity:0.7;
 }
 
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1 { font-size:2rem; }
 }
 </style>
 </head>
@@ -95,7 +129,7 @@ footer {
 <body>
 
 <header>
-  <h2>🏏 GPL</h2>
+  <img src="./assets/org-logo/logo.png" alt="Golden Eagle">
   <nav>
     <a href="#">Home</a>
     <a href="#nominate">Nominate</a>
@@ -104,35 +138,39 @@ footer {
 </header>
 
 <section class="hero">
-  <h1>Nominate a Captain</h1>
-  <p>This year, captains will be girls! 🎉</p>
-  <button onclick="scrollToForm()">Nominate Now</button>
+  <h1>GPL Cricket Tournament 🏏</h1>
+  <p><span>This year, captains will be girls!</span></p>
+  <button class="cta-btn" onclick="scrollToForm()">Nominate Now</button>
 </section>
 
 <section id="nominate" class="section">
-  <h2>Nomination Form</h2>
+  <h2>Nominate a Captain</h2>
 
   <form class="form-container" action="https://formspree.io/f/xeepqygr" method="POST">
-
     <input type="hidden" name="_subject" value="New GPL Captain Nomination">
-    <input type="text" name="_gotcha" style="display:none">
 
     <input type="text" name="nominee_name" placeholder="Nominee Name" required>
     <input type="text" name="team" placeholder="Team / Department">
     <textarea name="reason" placeholder="Why should they be captain?"></textarea>
     <input type="text" name="your_name" placeholder="Your Name">
 
-    <button type="submit">Submit Nomination</button>
+    <button class="cta-btn">Submit Nomination</button>
   </form>
 </section>
 
 <section id="captains" class="section">
   <h2>Final Captains</h2>
-  <p>To be announced soon 🎉</p>
+
+  <div class="cards">
+    <div class="card">Captain 1</div>
+    <div class="card">Captain 2</div>
+    <div class="card">Captain 3</div>
+    <div class="card">Captain 4</div>
+  </div>
 </section>
 
 <footer>
-  © GPL Tournament | Built with ❤️
+  © GPL Tournament | Powered by Golden Eagle 🦅
 </footer>
 
 <script>
