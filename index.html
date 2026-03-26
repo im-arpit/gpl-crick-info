@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPL Cricket Tournament</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Libre Baskerville', serif;
+  background: linear-gradient(to right, #0f2027, #2c5364);
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero p {
+  margin: 20px 0;
+  font-size: 1.2rem;
+}
+
+button {
+  background: #ff9800;
+  border: none;
+  padding: 15px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: auto;
+  background: rgba(255,255,255,0.1);
+  padding: 25px;
+  border-radius: 10px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🏏 GPL</h2>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#nominate">Nominate</a>
+    <a href="#captains">Captains</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Nominate a Captain</h1>
+  <p>This year, captains will be girls! 🎉</p>
+  <button onclick="scrollToForm()">Nominate Now</button>
+</section>
+
+<section id="nominate" class="section">
+  <h2>Nomination Form</h2>
+
+  <form class="form-container" action="https://formspree.io/f/xeepqygr" method="POST">
+
+    <input type="hidden" name="_subject" value="New GPL Captain Nomination">
+    <input type="text" name="_gotcha" style="display:none">
+
+    <input type="text" name="nominee_name" placeholder="Nominee Name" required>
+    <input type="text" name="team" placeholder="Team / Department">
+    <textarea name="reason" placeholder="Why should they be captain?"></textarea>
+    <input type="text" name="your_name" placeholder="Your Name">
+
+    <button type="submit">Submit Nomination</button>
+  </form>
+</section>
+
+<section id="captains" class="section">
+  <h2>Final Captains</h2>
+  <p>To be announced soon 🎉</p>
+</section>
+
+<footer>
+  © GPL Tournament | Built with ❤️
+</footer>
+
+<script>
+function scrollToForm() {
+  document.getElementById("nominate").scrollIntoView({ behavior: "smooth" });
+}
+</script>
+
+</body>
+</html>
