@@ -13,7 +13,20 @@
 body {
   font-family: 'Poppins', sans-serif;
   color: white;
-  background: #0f172a;
+  background: #020617;
+  overflow-x:hidden;
+}
+
+/* BACKGROUND GLOW */
+body::before {
+  content:"";
+  position:fixed;
+  width:600px;
+  height:600px;
+  background: radial-gradient(circle, rgba(250,204,21,0.2), transparent);
+  top:-200px;
+  left:-200px;
+  z-index:-1;
 }
 
 /* HEADER */
@@ -27,21 +40,21 @@ header {
   z-index:10;
 }
 
-header img {
-  height:50px;
-}
+header img { height:50px; }
 
 nav a {
   margin-left:20px;
   color:white;
   text-decoration:none;
-  font-size:14px;
+  opacity:0.8;
 }
+
+nav a:hover { opacity:1; }
 
 /* HERO */
 .hero {
   height:100vh;
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
               url('./assets/hero.jpeg') center/cover;
   display:flex;
   flex-direction:column;
@@ -51,29 +64,42 @@ nav a {
 }
 
 .hero h1 {
-  font-size:3rem;
+  font-size:3.2rem;
   font-weight:600;
 }
 
 .hero p {
   margin:20px 0;
-  font-size:1.1rem;
-  color:#e2e8f0;
+  color:#cbd5f5;
 }
 
 .highlight {
   color:#facc15;
-  font-weight:500;
 }
 
+/* BUTTON */
 .cta-btn {
   background:#facc15;
   color:black;
-  padding:14px 28px;
-  border-radius:30px;
+  padding:14px 30px;
+  border-radius:40px;
+  border:none;
   font-weight:600;
   cursor:pointer;
-  border:none;
+  transition: all 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.cta-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(250,204,21,0.5);
+}
+
+/* FLOAT */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
 }
 
 /* SECTION */
@@ -82,29 +108,37 @@ nav a {
   text-align:center;
 }
 
-/* FORM */
+/* GLASS CARD */
 .form-container {
   max-width:500px;
   margin:auto;
-  background:rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
+  background:rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
   padding:30px;
   border-radius:15px;
+  border:1px solid rgba(255,255,255,0.1);
 }
 
+/* INPUT */
 input, textarea {
   width:100%;
   padding:12px;
   margin:10px 0;
   border:none;
   border-radius:8px;
-  font-family: inherit;
+  background:rgba(255,255,255,0.08);
+  color:white;
 }
 
-/* CAPTAINS */
+input:focus, textarea:focus {
+  outline:none;
+  box-shadow: 0 0 0 2px #facc15;
+}
+
+/* ANNOUNCEMENT */
 .announcement {
   margin-top:20px;
-  font-size:1.1rem;
+  font-size:1.2rem;
   color:#facc15;
 }
 
@@ -113,7 +147,19 @@ footer {
   padding:20px;
   text-align:center;
   font-size:12px;
-  opacity:0.7;
+  opacity:0.6;
+}
+
+/* FADE ANIMATION */
+.fade {
+  opacity:0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.fade.show {
+  opacity:1;
+  transform: translateY(0);
 }
 
 /* MOBILE */
@@ -126,7 +172,7 @@ footer {
 <body>
 
 <header>
-  <img src="./assets/org-logo.webp" alt="Golden Eagle">
+  <img src="./assets/org-logo.webp">
   <nav>
     <a href="#">Home</a>
     <a href="#nominate">Nominate</a>
@@ -134,21 +180,22 @@ footer {
   </nav>
 </header>
 
-<section class="hero">
+<section class="hero fade">
   <h1>GPL Cricket Tournament 🏏</h1>
   <p class="highlight">This year, captains will be girls</p>
   <button class="cta-btn" onclick="scrollToForm()">Nominate Now</button>
 </section>
 
-<section id="nominate" class="section">
+<section id="nominate" class="section fade">
   <h2>Nominate a Captain</h2>
 
-  <form class="form-container" action="https://formspree.io/f/xeepqygr" method="POST">
-    <input type="hidden" name="_redirect" value="https://im-arpit.github.io/gpl/thankyou.html">
+  <form class="form-container" action="https://formspree.io/f/xeepqygr" method="POST" onsubmit="showConfetti()">
+
+    <input type="hidden" name="_redirect" value="https://your-username.github.io/gpl-captain-site/thankyou.html">
     <input type="hidden" name="_subject" value="New GPL Captain Nomination">
 
     <input type="text" name="nominee_name" placeholder="Nominee Name" required>
-    <input type="text" name="team" placeholder="Team / Department">
+    <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="reason" placeholder="Why should they be captain?"></textarea>
     <input type="text" name="your_name" placeholder="Your Name">
 
@@ -156,7 +203,7 @@ footer {
   </form>
 </section>
 
-<section id="captains" class="section">
+<section id="captains" class="section fade">
   <h2>Captains Announcement</h2>
   <p class="announcement">Captains will be announced soon 🎉</p>
 </section>
@@ -166,8 +213,32 @@ footer {
 </footer>
 
 <script>
+// smooth scroll
 function scrollToForm() {
   document.getElementById("nominate").scrollIntoView({ behavior: "smooth" });
+}
+
+// fade in
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+});
+
+document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+// confetti
+function showConfetti() {
+  const confetti = document.createElement("div");
+  confetti.innerHTML = "🎉🎉🎉";
+  confetti.style.position = "fixed";
+  confetti.style.top = "50%";
+  confetti.style.left = "50%";
+  confetti.style.fontSize = "40px";
+  document.body.appendChild(confetti);
+  setTimeout(() => confetti.remove(), 1500);
 }
 </script>
 
