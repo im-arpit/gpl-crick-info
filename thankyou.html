@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | GPL</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+              url('./assets/hero.jpg') center/cover no-repeat;
+  color: white;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+/* CONTAINER */
+.container {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 450px;
+  width: 90%;
+}
+
+/* LOGO */
+.logo {
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+/* TEXT */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #e2e8f0;
+  margin-bottom: 25px;
+}
+
+/* BUTTON */
+.btn {
+  background: #facc15;
+  color: black;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  h1 { font-size: 1.5rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <img src="./assets/org-logo/logo.png" class="logo" alt="Golden Eagle">
+
+  <h1>Thank You! 🎉</h1>
+  
+  <p>Your nomination has been successfully submitted.</p>
+  
+  <p>Stay tuned — captains will be announced soon!</p>
+
+  <a href="index.html" class="btn">Back to Home</a>
+
+</div>
+
+</body>
+</html>
