@@ -3,244 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GPL Cricket Tournament</title>
+<title>GPL Cricket Tournament 2026</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background:#020617;
+body{
+  font-family:'Poppins',sans-serif;
   color:white;
+  background:#020617;
   overflow-x:hidden;
 }
 
-/* GLOW BG */
-body::before {
+/* ANIMATED BACKGROUND */
+body::before{
   content:"";
   position:fixed;
-  width:600px;
-  height:600px;
-  background: radial-gradient(circle, rgba(250,204,21,0.15), transparent);
-  top:-200px;
-  left:-200px;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle at 20% 30%, rgba(250,204,21,0.15), transparent),
+              radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent);
+  animation:moveBg 10s infinite alternate ease-in-out;
   z-index:-1;
 }
 
-/* HEADER */
-header {
-  display:flex;
-  justify-content:space-between;
-  padding:20px 40px;
-  position:absolute;
-  width:100%;
+@keyframes moveBg{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(-100px,-100px)}
 }
 
-header img { height:50px; }
+/* HEADER */
+header{
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
 
-nav a {
-  margin-left:20px;
-  color:white;
-  text-decoration:none;
-  opacity:0.8;
+header img{
+  height:55px;
 }
 
 /* HERO */
-.hero {
-  height:100vh;
-  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
-              url('./assets/hero.jpeg') center/cover;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+.hero{
   text-align:center;
+  padding:40px 20px;
 }
 
-.hero h1 { font-size:3rem; }
-.hero p { margin:20px 0; color:#cbd5f5; }
-.highlight { color:#facc15; }
+.hero h1{
+  font-size:2.8rem;
+  font-weight:600;
+}
 
-/* BUTTON */
-.cta-btn {
+.highlight{
+  color:#facc15;
+  margin-top:10px;
+}
+
+.meta{
+  margin-top:8px;
+  color:#94a3b8;
+}
+
+/* CRICKET DECOR */
+.cricket{
+  position:absolute;
+  width:120px;
+  height:120px;
+  border:2px solid rgba(255,255,255,0.1);
+  border-radius:50%;
+  top:20%;
+  left:10%;
+  animation:float 6s infinite ease-in-out;
+}
+
+.cricket::after{
+  content:"";
+  position:absolute;
+  width:10px;
+  height:10px;
   background:#facc15;
-  color:black;
-  padding:14px 30px;
-  border-radius:40px;
-  border:none;
-  cursor:pointer;
-  transition:0.3s;
-  animation: float 3s infinite;
+  border-radius:50%;
+  top:50%;
+  left:50%;
 }
 
-.cta-btn:hover {
-  transform:scale(1.05);
-  box-shadow:0 10px 30px rgba(250,204,21,0.5);
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
 }
-
-@keyframes float {
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
-
-/* SECTION */
-.section { padding:80px 20px; text-align:center; }
 
 /* FORM */
-.form-container {
+.form-container{
   max-width:500px;
-  margin:auto;
+  margin:30px auto;
   background:rgba(255,255,255,0.05);
-  backdrop-filter: blur(15px);
+  backdrop-filter:blur(15px);
   padding:30px;
   border-radius:15px;
+  border:1px solid rgba(255,255,255,0.08);
 }
 
-input, textarea {
+input,textarea{
   width:100%;
   padding:12px;
-  margin:10px 0;
+  margin:12px 0;
   border:none;
   border-radius:8px;
   background:rgba(255,255,255,0.08);
   color:white;
 }
 
-input:focus, textarea:focus {
+input:focus,textarea:focus{
   outline:none;
   box-shadow:0 0 0 2px #facc15;
 }
 
-/* COUNTDOWN */
-.countdown {
-  font-size:1.5rem;
-  margin-top:15px;
-  color:#facc15;
+/* BUTTON */
+.cta-btn{
+  width:100%;
+  background:#facc15;
+  color:black;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.3s;
 }
 
-/* FADE */
-.fade {
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
+.cta-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(250,204,21,0.3);
 }
-.fade.show {
+
+/* ANNOUNCEMENT */
+.section{
+  text-align:center;
+  padding:50px 20px;
+}
+
+.announcement{
+  color:#facc15;
+  margin-top:10px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#16a34a;
+  padding:12px 20px;
+  border-radius:8px;
+  opacity:0;
+  transition:.4s;
+}
+
+.toast.show{
   opacity:1;
-  transform:translateY(0);
 }
 
 /* FOOTER */
-footer {
+footer{
   text-align:center;
   padding:20px;
   opacity:0.6;
 }
 
+/* MOBILE */
 @media(max-width:768px){
-  .hero h1 { font-size:2rem; }
+  .hero h1{font-size:2rem}
 }
 </style>
 </head>
 
 <body>
 
+<div class="cricket"></div>
+
 <header>
   <img src="./assets/org-logo.webp">
-  <nav>
-    <a href="#">Home</a>
-    <a href="#nominate">Nominate</a>
-    <a href="#captains">Captains</a>
-  </nav>
 </header>
 
-<section class="hero fade">
-  <h1>GPL Cricket Tournament 🏏</h1>
+<section class="hero">
+  <h1>GPL Cricket Tournament 2026 🏏</h1>
   <p class="highlight">This year, captains will be girls</p>
-  <button class="cta-btn" onclick="scrollToForm()">Nominate Now</button>
+  <div class="meta">📅 4th April 2026</div>
 </section>
 
-<section id="nominate" class="section fade">
+<form class="form-container" onsubmit="handleSubmit(event)">
   <h2>Nominate a Captain</h2>
 
-  <form class="form-container"
-        action="https://formspree.io/f/xeepqygr"
-        method="POST"
-        onsubmit="triggerConfetti()">
+  <input type="text" name="nominee_name" placeholder="Nominee Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="reason" placeholder="Why should they be captain?"></textarea>
+  <input type="text" name="your_name" placeholder="Your Name">
 
-    <input type="hidden" name="_redirect" value="https://your-username.github.io/gpl-captain-site/thankyou.html">
+  <button class="cta-btn">Submit Nomination</button>
+</form>
 
-    <input type="text" name="nominee_name" placeholder="Nominee Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea name="reason" placeholder="Why should they be captain?"></textarea>
-    <input type="text" name="your_name" placeholder="Your Name">
-
-    <button class="cta-btn">Submit Nomination</button>
-  </form>
-</section>
-
-<section id="captains" class="section fade">
+<section class="section">
   <h2>Captains Announcement</h2>
-  <p>Captains will be announced soon 🎉</p>
-
-  <div class="countdown" id="countdown"></div>
+  <p class="announcement">Captains will be announced soon 🎉</p>
 </section>
 
 <footer>
-  © GPL Tournament | Golden Eagle 🦅
+  © GPL Tournament 2026 | Golden Eagle 🦅
 </footer>
 
-<!-- CONFETTI LIB -->
+<div class="toast" id="toast">Nomination submitted successfully 🎉</div>
+
+<!-- CONFETTI -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
-// smooth scroll
-function scrollToForm() {
-  document.getElementById("nominate").scrollIntoView({ behavior:"smooth" });
-}
+function handleSubmit(e){
+  e.preventDefault();
 
-// fade animation
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add("show");
-  });
-});
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+  // confetti
+  const duration=2000;
+  const end=Date.now()+duration;
 
-// CONFETTI (FULL SCREEN PARTY)
-function triggerConfetti() {
-  const duration = 2000;
-  const end = Date.now() + duration;
-
-  (function frame() {
-    confetti({ particleCount: 6, angle: 60, spread: 80, origin: { x: 0 } });
-    confetti({ particleCount: 6, angle: 120, spread: 80, origin: { x: 1 } });
-
-    if (Date.now() < end) requestAnimationFrame(frame);
+  (function frame(){
+    confetti({particleCount:6,angle:60,spread:80,origin:{x:0}});
+    confetti({particleCount:6,angle:120,spread:80,origin:{x:1}});
+    if(Date.now()<end) requestAnimationFrame(frame);
   })();
+
+  // toast
+  const toast=document.getElementById("toast");
+  toast.classList.add("show");
+
+  setTimeout(()=>toast.classList.remove("show"),3000);
+
+  // reset form
+  e.target.reset();
 }
-
-// FORM RESET
-window.addEventListener("pageshow", () => {
-  document.querySelector("form")?.reset();
-});
-
-// COUNTDOWN (set your date)
-const targetDate = new Date();
-targetDate.setDate(targetDate.getDate() + 5);
-
-setInterval(()=>{
-  const now = new Date();
-  const diff = targetDate - now;
-
-  const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff / (1000*60*60)) % 24);
-  const m = Math.floor((diff / (1000*60)) % 60);
-
-  document.getElementById("countdown").innerText =
-    `${d}d ${h}h ${m}m remaining`;
-},1000);
 </script>
 
 </body>
