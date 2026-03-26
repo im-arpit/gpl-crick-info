@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GPL Cricket Tournament</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Poppins', sans-serif;
   color: white;
   background: #0f172a;
 }
@@ -35,13 +35,14 @@ nav a {
   margin-left:20px;
   color:white;
   text-decoration:none;
+  font-size:14px;
 }
 
 /* HERO */
 .hero {
   height:100vh;
   background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-              url('./assets/hero.jpeg') center/cover;
+              url('./assets/hero.jpg') center/cover;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -50,24 +51,27 @@ nav a {
 }
 
 .hero h1 {
-  font-size:3.5rem;
-}
-
-.hero span {
-  color:#facc15;
+  font-size:3rem;
+  font-weight:600;
 }
 
 .hero p {
   margin:20px 0;
-  font-size:1.2rem;
+  font-size:1.1rem;
+  color:#e2e8f0;
+}
+
+.highlight {
+  color:#facc15;
+  font-weight:500;
 }
 
 .cta-btn {
   background:#facc15;
   color:black;
-  padding:15px 30px;
+  padding:14px 28px;
   border-radius:30px;
-  font-weight:bold;
+  font-weight:600;
   cursor:pointer;
   border:none;
 }
@@ -82,7 +86,7 @@ nav a {
 .form-container {
   max-width:500px;
   margin:auto;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.08);
   backdrop-filter: blur(10px);
   padding:30px;
   border-radius:15px;
@@ -94,21 +98,14 @@ input, textarea {
   margin:10px 0;
   border:none;
   border-radius:8px;
+  font-family: inherit;
 }
 
 /* CAPTAINS */
-.cards {
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-
-.card {
-  background:rgba(255,255,255,0.1);
-  padding:20px;
-  border-radius:12px;
-  width:200px;
+.announcement {
+  margin-top:20px;
+  font-size:1.1rem;
+  color:#facc15;
 }
 
 /* FOOTER */
@@ -129,7 +126,7 @@ footer {
 <body>
 
 <header>
-  <img src="./assets/org-logo.webp" alt="Golden Eagle">
+  <img src="./assets/org-logo/logo.png" alt="Golden Eagle">
   <nav>
     <a href="#">Home</a>
     <a href="#nominate">Nominate</a>
@@ -139,7 +136,7 @@ footer {
 
 <section class="hero">
   <h1>GPL Cricket Tournament 🏏</h1>
-  <p><span>This year, captains will be girls!</span></p>
+  <p class="highlight">This year, captains will be girls</p>
   <button class="cta-btn" onclick="scrollToForm()">Nominate Now</button>
 </section>
 
@@ -147,6 +144,7 @@ footer {
   <h2>Nominate a Captain</h2>
 
   <form class="form-container" action="https://formspree.io/f/xeepqygr" method="POST">
+    <input type="hidden" name="_redirect" value="https://im-arpit.github.io/gpl/thankyou.html">
     <input type="hidden" name="_subject" value="New GPL Captain Nomination">
 
     <input type="text" name="nominee_name" placeholder="Nominee Name" required>
@@ -159,14 +157,8 @@ footer {
 </section>
 
 <section id="captains" class="section">
-  <h2>Final Captains</h2>
-
-  <div class="cards">
-    <div class="card">Captain 1</div>
-    <div class="card">Captain 2</div>
-    <div class="card">Captain 3</div>
-    <div class="card">Captain 4</div>
-  </div>
+  <h2>Captains Announcement</h2>
+  <p class="announcement">Captains will be announced soon 🎉</p>
 </section>
 
 <footer>
