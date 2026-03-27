@@ -256,7 +256,7 @@ async function load(){
     count[d.nominee_name]=(count[d.nominee_name]||0)+1;
   });
 
-  const sorted=Object.entries(count).sort((a,b)=>b[1]-a[1]).slice(0,4);
+  const sorted=Object.entries(count).sort((a,b)=>b[1]-a[1]);
 
   const max=sorted[0]?.[1]||1;
 
