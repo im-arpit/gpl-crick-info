@@ -3,35 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GPL Cricket Tournament 2026</title>
+<title>GPL Tournament 2026</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 
 body{
   font-family:'Poppins',sans-serif;
-  color:white;
   background:#020617;
-  overflow-x:hidden;
+  color:white;
 }
 
-/* STADIUM LIGHT EFFECT */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 60%),
-              radial-gradient(circle at 20% 30%, rgba(34,197,94,0.2), transparent);
-  animation:moveBg 12s infinite alternate ease-in-out;
-  z-index:-1;
+/* NAVBAR */
+nav{
+  position:sticky;
+  top:0;
+  background:rgba(2,6,23,0.9);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  z-index:100;
 }
 
-@keyframes moveBg{
-  0%{transform:translate(0,0)}
-  100%{transform:translate(-100px,-100px)}
+nav h2{color:#22c55e}
+
+nav ul{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+nav a{
+  text-decoration:none;
+  color:white;
+  font-weight:500;
+}
+
+nav a:hover{
+  color:#22c55e;
 }
 
 /* HERO */
@@ -40,28 +52,17 @@ body::before{
   padding:50px 20px;
 }
 
-.hero h1{
-  font-size:3rem;
-  font-weight:700;
-}
+.hero h1{font-size:2.5rem}
 
-.highlight{
-  color:#22c55e;
-}
-
-.meta{
-  color:#94a3b8;
-}
+.highlight{color:#22c55e}
 
 /* FORM */
 .form-container{
-  max-width:520px;
+  max-width:500px;
   margin:30px auto;
-  background:rgba(15,23,42,0.85);
-  backdrop-filter:blur(12px);
-  padding:30px;
-  border-radius:15px;
-  box-shadow:0 0 40px rgba(34,197,94,0.15);
+  background:#0f172a;
+  padding:25px;
+  border-radius:12px;
 }
 
 input,textarea{
@@ -74,85 +75,75 @@ input,textarea{
   color:white;
 }
 
-.cta-btn{
+button{
   width:100%;
-  background:#22c55e;
   padding:14px;
   border:none;
-  border-radius:30px;
+  border-radius:25px;
+  background:#22c55e;
   font-weight:600;
   cursor:pointer;
 }
 
-/* LEADERBOARD */
+/* SECTIONS */
 .section{
-  text-align:center;
   padding:50px 20px;
+  text-align:center;
 }
 
-.leaderboard-container{
+/* LEADERBOARD */
+.leaderboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
   max-width:900px;
   margin:auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
 }
 
-/* CARDS */
-.leader-card{
+.card{
+  background:#0f172a;
   padding:20px;
-  border-radius:15px;
-  background:rgba(15,23,42,0.9);
-  border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;
   transition:.3s;
 }
 
-.leader-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 35px rgba(34,197,94,0.5);
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 20px rgba(34,197,94,0.5);
 }
 
-/* TOP 3 STYLING */
-.rank-1{
-  border:2px solid gold;
-  box-shadow:0 0 30px gold;
-}
-.rank-2{
-  border:2px solid silver;
-}
-.rank-3{
-  border:2px solid #cd7f32;
+.rank-1{border:2px solid gold}
+.rank-2{border:2px solid silver}
+.rank-3{border:2px solid #cd7f32}
+
+/* TEAMS */
+.teams{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  max-width:1000px;
+  margin:auto;
 }
 
-/* TEXT */
-.rank{
-  font-weight:700;
-  margin-bottom:5px;
+.team{
+  background:#0f172a;
+  padding:20px;
+  border-radius:12px;
 }
 
-.name{
-  font-size:1.2rem;
+.team h3{
+  color:#22c55e;
+  margin-bottom:10px;
 }
 
-.votes{
+.player{
+  padding:5px 0;
   font-size:0.9rem;
-  opacity:.8;
 }
 
-/* PROGRESS BAR */
-.bar{
-  height:6px;
-  background:#1e293b;
-  border-radius:10px;
-  margin-top:10px;
-  overflow:hidden;
-}
-
-.fill{
-  height:100%;
-  background:#22c55e;
-  width:0%;
-  transition:width 1s ease;
+.captain{
+  color:#facc15;
+  font-weight:600;
 }
 
 /* TOAST */
@@ -163,127 +154,190 @@ input,textarea{
   transform:translateX(-50%);
   background:#22c55e;
   color:black;
-  padding:12px;
+  padding:10px;
   border-radius:6px;
   opacity:0;
-  transition:.3s;
 }
+
 .toast.show{opacity:1}
 
-footer{
-  text-align:center;
-  padding:20px;
-  opacity:.6;
+/* MOBILE */
+@media(max-width:600px){
+  nav ul{gap:10px}
+  .hero h1{font-size:2rem}
 }
 </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <h1>GPL Cricket Tournament 2026 🏏</h1>
+<!-- NAVBAR -->
+<nav>
+  <h2>GPL 🏏</h2>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#leaderboard">Leaderboard</a></li>
+    <li><a href="#teams">Teams</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <h1>GPL Cricket Tournament 2026</h1>
   <p class="highlight">Captains will be girls</p>
-  <div class="meta">📅 4th April 2026</div>
+  <p>📅 4 April 2026</p>
 </section>
 
-<form class="form-container" id="nominationForm">
-  <h2>Nominate a Captain</h2>
+<!-- FORM -->
+<form class="form-container" id="form">
+  <h2>Nominate Captain</h2>
 
-  <input type="text" name="nominee_name" placeholder="Nominee Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <textarea name="reason" placeholder="Why should they be captain?"></textarea>
-  <input type="text" name="your_name" placeholder="Your Name">
+  <input name="nominee_name" placeholder="Nominee Name" required>
+  <input name="email" type="email" placeholder="Your Email" required>
+  <textarea name="reason" placeholder="Reason"></textarea>
+  <input name="your_name" placeholder="Your Name">
 
-  <button class="cta-btn">Submit Nomination</button>
+  <button>Submit</button>
 </form>
 
-<section class="section">
+<!-- LEADERBOARD -->
+<section id="leaderboard" class="section">
   <h2>🏆 Leaderboard</h2>
-  <div id="leaderboard" class="leaderboard-container"></div>
+  <div class="leaderboard" id="board"></div>
 </section>
 
-<footer>
-  © GPL Tournament 2026 | Golden Eagle
-</footer>
+<!-- TEAMS -->
+<section id="teams" class="section">
+  <h2>🏏 Teams</h2>
 
-<div class="toast" id="toast">Nomination submitted 🎉</div>
+  <div class="teams">
+
+    <div class="team">
+      <h3>Team A</h3>
+      <div class="player captain">Captain TBD</div>
+      <div class="player">Player 1</div>
+      <div class="player">Player 2</div>
+      <div class="player">Player 3</div>
+      <div class="player">Player 4</div>
+      <div class="player">Player 5</div>
+      <div class="player">Player 6</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 9</div>
+      <div class="player">Player 10</div>
+    </div>
+
+    <div class="team">
+      <h3>Team B</h3>
+      <div class="player captain">Captain TBD</div>
+      <div class="player">Player 1</div>
+      <div class="player">Player 2</div>
+      <div class="player">Player 3</div>
+      <div class="player">Player 4</div>
+      <div class="player">Player 5</div>
+      <div class="player">Player 6</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 9</div>
+      <div class="player">Player 10</div>
+    </div>
+
+    <div class="team">
+      <h3>Team C</h3>
+      <div class="player captain">Captain TBD</div>
+      <div class="player">Player 1</div>
+      <div class="player">Player 2</div>
+      <div class="player">Player 3</div>
+      <div class="player">Player 4</div>
+      <div class="player">Player 5</div>
+      <div class="player">Player 6</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 9</div>
+      <div class="player">Player 10</div>
+    </div>
+
+    <div class="team">
+      <h3>Team D</h3>
+      <div class="player captain">Captain TBD</div>
+      <div class="player">Player 1</div>
+      <div class="player">Player 2</div>
+      <div class="player">Player 3</div>
+      <div class="player">Player 4</div>
+      <div class="player">Player 5</div>
+      <div class="player">Player 6</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 7</div>
+      <div class="player">Player 9</div>
+      <div class="player">Player 10</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="toast" id="toast">Submitted 🎉</div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
-const API_URL = "https://script.google.com/macros/s/AKfycbyxESmYTw131TQQWpBix3t_rhyzesIZqAYhJqxeMB9bp9Z6kYP_2wYkNHqkniEVPPdapA/exec";
+const API="https://script.google.com/macros/s/AKfycbyxESmYTw131TQQWpBix3t_rhyzesIZqAYhJqxeMB9bp9Z6kYP_2wYkNHqkniEVPPdapA/exec";
 
-const form=document.getElementById("nominationForm");
+const form=document.getElementById("form");
 
 form.addEventListener("submit",async(e)=>{
   e.preventDefault();
 
   const data={
     nominee_name:form.nominee_name.value,
-    your_name:form.your_name.value,
     email:form.email.value,
-    reason:form.reason.value
+    reason:form.reason.value,
+    your_name:form.your_name.value
   };
 
-  await fetch(API_URL,{method:"POST",body:JSON.stringify(data)});
-
+  await fetch(API,{method:"POST",body:JSON.stringify(data)});
   showToast();
-  triggerConfetti();
+  confetti();
   form.reset();
-  loadLeaderboard();
+  load();
 });
 
 /* LEADERBOARD */
-async function loadLeaderboard(){
-  const res=await fetch(API_URL);
+async function load(){
+  const res=await fetch(API);
   const data=await res.json();
 
-  const counts={};
+  const count={};
+
   data.forEach(d=>{
-    counts[d.nominee_name]=(counts[d.nominee_name]||0)+1;
+    count[d.nominee_name]=(count[d.nominee_name]||0)+1;
   });
 
-  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const sorted=Object.entries(count)
+    .sort((a,b)=>b[1]-a[1]);
 
-  const maxVotes=sorted[0]?.[1]||1;
+  const board=document.getElementById("board");
+  board.innerHTML="";
 
-  const container=document.getElementById("leaderboard");
-  container.innerHTML="";
-
-  sorted.forEach((item,index)=>{
-    const percent=(item[1]/maxVotes)*100;
-
+  sorted.forEach((i,idx)=>{
     const div=document.createElement("div");
-    div.className=`leader-card rank-${index+1}`;
+    div.className=`card rank-${idx+1}`;
 
     div.innerHTML=`
-      <div class="rank">#${index+1}</div>
-      <div class="name">${item[0]}</div>
-      <div class="votes">${item[1]} votes</div>
-      <div class="bar"><div class="fill" style="width:${percent}%"></div></div>
+      <h3>#${idx+1} ${i[0]}</h3>
+      <p>${i[1]} votes</p>
     `;
 
-    container.appendChild(div);
+    board.appendChild(div);
   });
 }
 
-/* AUTO REFRESH */
-setInterval(loadLeaderboard,5000);
-loadLeaderboard();
+setInterval(load,5000);
+load();
 
-/* UI */
 function showToast(){
   const t=document.getElementById("toast");
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),3000);
-}
-
-function triggerConfetti(){
-  const end=Date.now()+2000;
-  (function frame(){
-    confetti({particleCount:10,spread:100,origin:{y:0.6}});
-    if(Date.now()<end) requestAnimationFrame(frame);
-  })();
 }
 </script>
 
