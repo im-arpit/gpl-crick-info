@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GPL Cricket Tournament 2026</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -17,15 +17,15 @@ body{
   overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* STADIUM LIGHT EFFECT */
 body::before{
   content:"";
   position:fixed;
   width:200%;
   height:200%;
-  background: radial-gradient(circle at 20% 30%, rgba(34,197,94,0.15), transparent),
-              radial-gradient(circle at 80% 70%, rgba(59,130,246,0.15), transparent);
-  animation:moveBg 10s infinite alternate ease-in-out;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 60%),
+              radial-gradient(circle at 20% 30%, rgba(34,197,94,0.2), transparent);
+  animation:moveBg 12s infinite alternate ease-in-out;
   z-index:-1;
 }
 
@@ -37,11 +37,12 @@ body::before{
 /* HERO */
 .hero{
   text-align:center;
-  padding:40px 20px;
+  padding:50px 20px;
 }
 
 .hero h1{
-  font-size:2.8rem;
+  font-size:3rem;
+  font-weight:700;
 }
 
 .highlight{
@@ -56,9 +57,11 @@ body::before{
 .form-container{
   max-width:520px;
   margin:30px auto;
-  background:rgba(15,23,42,0.9);
+  background:rgba(15,23,42,0.85);
+  backdrop-filter:blur(12px);
   padding:30px;
-  border-radius:12px;
+  border-radius:15px;
+  box-shadow:0 0 40px rgba(34,197,94,0.15);
 }
 
 input,textarea{
@@ -84,40 +87,75 @@ input,textarea{
 /* LEADERBOARD */
 .section{
   text-align:center;
-  padding:40px 20px;
+  padding:50px 20px;
 }
 
 .leaderboard-container{
   max-width:900px;
   margin:auto;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
 }
 
+/* CARDS */
 .leader-card{
-  background:rgba(15,23,42,0.9);
   padding:20px;
-  border-radius:12px;
+  border-radius:15px;
+  background:rgba(15,23,42,0.9);
   border:1px solid rgba(255,255,255,0.1);
   transition:.3s;
 }
 
 .leader-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 25px rgba(34,197,94,0.4);
+  transform:translateY(-8px);
+  box-shadow:0 0 35px rgba(34,197,94,0.5);
 }
 
+/* TOP 3 STYLING */
+.rank-1{
+  border:2px solid gold;
+  box-shadow:0 0 30px gold;
+}
+.rank-2{
+  border:2px solid silver;
+}
+.rank-3{
+  border:2px solid #cd7f32;
+}
+
+/* TEXT */
 .rank{
-  color:#22c55e;
+  font-weight:700;
+  margin-bottom:5px;
 }
 
-footer{
-  text-align:center;
-  padding:20px;
-  opacity:.6;
+.name{
+  font-size:1.2rem;
 }
 
+.votes{
+  font-size:0.9rem;
+  opacity:.8;
+}
+
+/* PROGRESS BAR */
+.bar{
+  height:6px;
+  background:#1e293b;
+  border-radius:10px;
+  margin-top:10px;
+  overflow:hidden;
+}
+
+.fill{
+  height:100%;
+  background:#22c55e;
+  width:0%;
+  transition:width 1s ease;
+}
+
+/* TOAST */
 .toast{
   position:fixed;
   bottom:30px;
@@ -130,8 +168,13 @@ footer{
   opacity:0;
   transition:.3s;
 }
-
 .toast.show{opacity:1}
+
+footer{
+  text-align:center;
+  padding:20px;
+  opacity:.6;
+}
 </style>
 </head>
 
@@ -155,7 +198,7 @@ footer{
 </form>
 
 <section class="section">
-  <h2>🏆 Top Captain Nominations</h2>
+  <h2>🏆 Leaderboard</h2>
   <div id="leaderboard" class="leaderboard-container"></div>
 </section>
 
@@ -170,22 +213,19 @@ footer{
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbyxESmYTw131TQQWpBix3t_rhyzesIZqAYhJqxeMB9bp9Z6kYP_2wYkNHqkniEVPPdapA/exec";
 
-const form = document.getElementById("nominationForm");
+const form=document.getElementById("nominationForm");
 
-form.addEventListener("submit", async function(e){
+form.addEventListener("submit",async(e)=>{
   e.preventDefault();
 
-  const data = {
-    nominee_name: form.nominee_name.value,
-    your_name: form.your_name.value,
-    email: form.email.value,
-    reason: form.reason.value
+  const data={
+    nominee_name:form.nominee_name.value,
+    your_name:form.your_name.value,
+    email:form.email.value,
+    reason:form.reason.value
   };
 
-  await fetch(API_URL, {
-    method:"POST",
-    body: JSON.stringify(data)
-  });
+  await fetch(API_URL,{method:"POST",body:JSON.stringify(data)});
 
   showToast();
   triggerConfetti();
@@ -193,37 +233,45 @@ form.addEventListener("submit", async function(e){
   loadLeaderboard();
 });
 
+/* LEADERBOARD */
 async function loadLeaderboard(){
-  const res = await fetch(API_URL);
-  const data = await res.json();
+  const res=await fetch(API_URL);
+  const data=await res.json();
 
-  const counts = {};
+  const counts={};
   data.forEach(d=>{
     counts[d.nominee_name]=(counts[d.nominee_name]||0)+1;
   });
 
-  const sorted = Object.entries(counts)
-    .sort((a,b)=>b[1]-a[1]);
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,4);
+
+  const maxVotes=sorted[0]?.[1]||1;
 
   const container=document.getElementById("leaderboard");
   container.innerHTML="";
 
   sorted.forEach((item,index)=>{
+    const percent=(item[1]/maxVotes)*100;
+
     const div=document.createElement("div");
-    div.className="leader-card";
+    div.className=`leader-card rank-${index+1}`;
 
     div.innerHTML=`
       <div class="rank">#${index+1}</div>
-      <div>${item[0]}</div>
-      <div>${item[1]} votes</div>
+      <div class="name">${item[0]}</div>
+      <div class="votes">${item[1]} votes</div>
+      <div class="bar"><div class="fill" style="width:${percent}%"></div></div>
     `;
 
     container.appendChild(div);
   });
 }
 
+/* AUTO REFRESH */
+setInterval(loadLeaderboard,5000);
 loadLeaderboard();
 
+/* UI */
 function showToast(){
   const t=document.getElementById("toast");
   t.classList.add("show");
@@ -231,10 +279,9 @@ function showToast(){
 }
 
 function triggerConfetti(){
-  const end=Date.now()+1500;
+  const end=Date.now()+2000;
   (function frame(){
-    confetti({particleCount:5,angle:60,spread:70,origin:{x:0}});
-    confetti({particleCount:5,angle:120,spread:70,origin:{x:1}});
+    confetti({particleCount:10,spread:100,origin:{y:0.6}});
     if(Date.now()<end) requestAnimationFrame(frame);
   })();
 }
