@@ -203,8 +203,7 @@ async function loadLeaderboard(){
   });
 
   const sorted = Object.entries(counts)
-    .sort((a,b)=>b[1]-a[1])
-    .slice(0,4);
+    .sort((a,b)=>b[1]-a[1]);
 
   const container=document.getElementById("leaderboard");
   container.innerHTML="";
