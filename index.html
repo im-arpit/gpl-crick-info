@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GPL 2026 Live</title>
+<title>GPL 2026 Teams</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -12,262 +12,201 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background:#020617;
   color:white;
-}
-
-/* SCOREBOARD */
-.scoreboard{
-  display:flex;
-  justify-content:space-between;
-  padding:12px 20px;
-  background:black;
-  border-bottom:2px solid #22c55e;
-}
-
-.live{
-  color:#22c55e;
-  font-weight:bold;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent),
+    linear-gradient(to bottom,#0a2e0a,#021802);
+  overflow-x:hidden;
 }
 
 /* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:15px 25px;
+  background:rgba(0,0,0,0.6);
 }
 .logo{height:40px}
 
 /* HERO */
-.hero{text-align:center;padding:20px}
-
-/* MATCH PANEL */
-.match{
-  max-width:600px;
-  margin:20px auto;
-  background:rgba(255,255,255,0.05);
-  padding:20px;
-  border-radius:12px;
+.hero{
   text-align:center;
+  padding:30px;
 }
-
-.score{
-  font-size:2rem;
-  margin:10px 0;
-}
-
-.commentary{
-  max-height:120px;
-  overflow:auto;
-  font-size:0.9rem;
-  opacity:.8;
-  margin-top:10px;
-}
-
-button{
-  padding:10px 20px;
-  border:none;
-  border-radius:20px;
-  background:#22c55e;
-  cursor:pointer;
-  margin-top:10px;
-}
-
-/* SWITCHER */
-.switcher{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  padding:10px;
-}
-.switcher button{
-  background:#1e293b;
-  color:white;
-}
-.switcher .active{
-  background:#22c55e;
-  color:black;
-}
+.meta{opacity:.8;margin-top:8px}
 
 /* TEAMS */
 .teams{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-  padding:20px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+  padding:25px;
 }
 
+/* TEAM CARD */
 .team{
-  border-radius:15px;
-  padding:20px;
-}
-
-/* COLORS */
-.team-a{background:#111;border:2px solid gold}
-.team-b{background:#1e3a8a}
-.team-c{background:#6d28d9}
-.team-d{background:#dc2626}
-
-.captain{color:#facc15;margin-bottom:10px}
-
-.players{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-}
-
-.player{
-  background:rgba(255,255,255,0.1);
-  padding:6px 10px;
   border-radius:20px;
-  font-size:0.8rem;
+  padding:20px;
+  position:relative;
+  overflow:hidden;
+  backdrop-filter:blur(8px);
+  animation:fadeUp .8s ease forwards;
+  opacity:0;
+}
+
+/* ENTRY ANIMATION */
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0)}
+}
+.team:nth-child(1){animation-delay:.1s}
+.team:nth-child(2){animation-delay:.2s}
+.team:nth-child(3){animation-delay:.3s}
+.team:nth-child(4){animation-delay:.4s}
+
+/* TEAM COLORS */
+.team-a{background:linear-gradient(#000,#1f1f1f);border:2px solid gold}
+.team-b{background:linear-gradient(#0f172a,#1e3a8a);border:2px solid #3b82f6}
+.team-c{background:linear-gradient(#1e1b4b,#6d28d9);border:2px solid #a855f7}
+.team-d{background:linear-gradient(#3f0a0a,#dc2626);border:2px solid #ef4444}
+
+/* HOVER */
+.team:hover{
+  transform:translateY(-10px) scale(1.02);
+  box-shadow:0 0 30px rgba(255,255,255,0.2);
+}
+
+/* CAPTAIN */
+.captain{
+  font-weight:700;
+  color:#facc15;
+  margin-bottom:15px;
+}
+
+/* PLAYERS GRID */
+.players{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+/* PLAYER CHIP */
+.player{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  background:rgba(255,255,255,0.08);
+  border-radius:12px;
+  transition:.3s;
+}
+
+.player img{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+}
+
+.player:hover{
+  background:#22c55e;
+  color:black;
+  transform:scale(1.05);
 }
 
 /* VENUE */
-.venue{text-align:center;padding:20px}
-iframe{width:100%;height:250px;border:none;border-radius:10px}
+.venue{
+  text-align:center;
+  padding:20px;
+}
+
+.map{
+  max-width:500px;
+  margin:15px auto;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+iframe{
+  width:100%;
+  height:200px;
+  border:none;
+}
 </style>
 </head>
 
 <body>
 
-<div class="scoreboard">
-  <div>🏏 GPL LIVE</div>
-  <div class="live">● LIVE</div>
-</div>
-
 <div class="header">
   <img src="assets/org-logo.webp" class="logo">
-  <h2>Match Simulation</h2>
+  <h2>GPL 🏏</h2>
 </div>
 
 <section class="hero">
-  <h1>GPL Tournament 2026</h1>
+  <h1>🏏 GPL Tournament 2026</h1>
+  <p class="meta">📅 4th April 2026 | 📍 LBW Turf | 🕟 4:30 PM onwards</p>
 </section>
 
-<!-- MATCH -->
-<div class="match">
-  <div class="score" id="score">0 / 0 (0.0)</div>
-  <button onclick="startMatch()">▶ Start Match</button>
+<section class="teams">
 
-  <div class="commentary" id="commentary"></div>
-</div>
-
-<!-- SWITCHER -->
-<div class="switcher">
-  <button onclick="filterTeams('all')" class="active">All</button>
-  <button onclick="filterTeams('team-a')">A</button>
-  <button onclick="filterTeams('team-b')">B</button>
-  <button onclick="filterTeams('team-c')">C</button>
-  <button onclick="filterTeams('team-d')">D</button>
-</div>
-
-<!-- TEAMS -->
-<div class="teams">
-
+<!-- TEAM A -->
 <div class="team team-a">
-<h3>Team A</h3>
-<div class="captain">👑 Mili</div>
-<div class="players">
-<span class="player">Mohak</span><span class="player">Harsh</span>
-<span class="player">Alok</span><span class="player">Krishna Soni</span>
-<span class="player">Palak</span><span class="player">Deepak</span>
-<span class="player">Kapil</span>
-</div>
+  <h2>Team A</h2>
+  <div class="captain">👑 Mili</div>
+  <div class="players">
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Mohak</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Harsh</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Alok</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Krishna</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Palak</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Deepak</div>
+  </div>
 </div>
 
+<!-- TEAM B -->
 <div class="team team-b">
-<h3>Team B</h3>
-<div class="captain">👑 Isha Mishra</div>
-<div class="players">
-<span class="player">Ashish</span><span class="player">Vasu</span>
-<span class="player">Prakhar</span><span class="player">Khushi</span>
-<span class="player">Sanskar</span><span class="player">Ritansh</span>
-<span class="player">Manish Bhaiya</span>
-</div>
+  <h2>Team B</h2>
+  <div class="captain">👑 Isha Mishra</div>
+  <div class="players">
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Ashish</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vasu</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Prakhar</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Khushi</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Sanskar</div>
+  </div>
 </div>
 
+<!-- TEAM C -->
 <div class="team team-c">
-<h3>Team C</h3>
-<div class="captain">👑 Riya</div>
-<div class="players">
-<span class="player">Yogesh</span><span class="player">Rahul</span>
-<span class="player">Anshul</span><span class="player">Satyam</span>
-<span class="player">Shivam</span><span class="player">Swati</span>
-<span class="player">Arpit</span>
-</div>
+  <h2>Team C</h2>
+  <div class="captain">👑 Riya</div>
+  <div class="players">
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Yogesh</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Rahul</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Anshul</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Satyam</div>
+  </div>
 </div>
 
+<!-- TEAM D -->
 <div class="team team-d">
-<h3>Team D</h3>
-<div class="captain">👑 Surbhi Baghel</div>
-<div class="players">
-<span class="player">Aman</span><span class="player">Surbhi Nikam</span>
-<span class="player">Vikas</span><span class="player">Pranjal</span>
-<span class="player">Paras</span><span class="player">Harshit</span>
-<span class="player">Prasanna</span>
-</div>
-</div>
-
+  <h2>Team D</h2>
+  <div class="captain">👑 Surbhi Baghel</div>
+  <div class="players">
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Aman</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vikas</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Pranjal</div>
+    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Paras</div>
+  </div>
 </div>
 
-<!-- VENUE -->
-<div class="venue">
-  <h2>📍 LBW Turf</h2>
-  <iframe src="https://www.google.com/maps?q=LBW+Turf+Indore&output=embed"></iframe>
-</div>
+</section>
 
-<script>
-let runs=0,wickets=0,balls=0;
-
-function startMatch(){
-  runs=0;wickets=0;balls=0;
-  document.getElementById("commentary").innerHTML="";
-
-  const interval=setInterval(()=>{
-    if(balls>=30 || wickets>=10){
-      clearInterval(interval);
-      return;
-    }
-
-    balls++;
-
-    let outcome=Math.floor(Math.random()*8);
-
-    let text="";
-
-    if(outcome<=4){
-      runs+=outcome;
-      text=outcome+" run";
-    } else if(outcome==5){
-      runs+=6;
-      text="SIX!";
-    } else if(outcome==6){
-      runs+=4;
-      text="FOUR!";
-    } else {
-      wickets++;
-      text="OUT!";
-    }
-
-    const overs=Math.floor(balls/6)+"."+balls%6;
-    document.getElementById("score").innerText=`${runs} / ${wickets} (${overs})`;
-
-    const c=document.getElementById("commentary");
-    c.innerHTML=text+"<br>"+c.innerHTML;
-
-  },1000);
-}
-
-function filterTeams(cls){
-  document.querySelectorAll('.team').forEach(t=>{
-    t.style.display=(cls==='all'||t.classList.contains(cls))?'block':'none';
-  });
-
-  document.querySelectorAll('.switcher button').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-}
-</script>
+<section class="venue">
+  <h2>📍 Venue</h2>
+  <div class="map">
+    <iframe src="https://www.google.com/maps?q=LBW+Turf+Indore&output=embed"></iframe>
+  </div>
+</section>
 
 </body>
 </html>
