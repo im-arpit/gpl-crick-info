@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GPL 2026 - Captain Announcement</title>
+<title>GPL 2026</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -12,26 +12,8 @@
 
 body{
   font-family:'Poppins',sans-serif;
+  background:#020617;
   color:white;
-  background:linear-gradient(to bottom,#0a2e0a,#021802);
-  overflow-x:hidden;
-}
-
-/* LIGHT EFFECT */
-body::before{
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  background:
-    radial-gradient(circle at 20% 0%,rgba(255,255,255,0.15),transparent),
-    radial-gradient(circle at 80% 0%,rgba(255,255,255,0.15),transparent);
-  animation:lights 6s infinite alternate;
-  z-index:-1;
-}
-@keyframes lights{
-  0%{transform:translateY(0)}
-  100%{transform:translateY(-60px)}
 }
 
 /* HEADER */
@@ -39,231 +21,191 @@ body::before{
   display:flex;
   justify-content:space-between;
   padding:15px 25px;
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.8);
 }
+.logo{height:40px}
 
-.logo{
-  height:40px;
-  animation:float 3s infinite;
-}
-@keyframes float{50%{transform:translateY(-5px)}}
-
-/* INFO */
-.info{
+/* HERO */
+.hero{
   text-align:center;
-  margin-top:20px;
+  padding:30px;
 }
-.meta{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  font-size:0.9rem;
-  opacity:.9;
-}
-
-/* TROPHY */
-.trophy{
-  font-size:60px;
-  text-align:center;
-  margin-top:20px;
-  animation:rise 1.5s ease forwards;
-  opacity:0;
-}
-@keyframes rise{
-  from{transform:translateY(200px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
-
-/* CAPTAINS */
-.captains{
-  text-align:center;
-  margin-top:20px;
-}
-
-.captain{
-  font-size:2rem;
-  opacity:0;
-  transform:translateY(40px);
-}
-
-.show{animation:reveal 1s forwards;}
-@keyframes reveal{to{opacity:1;transform:translateY(0)}}
-
-.glow{
-  color:#facc15;
-  text-shadow:0 0 25px gold;
-}
-
-/* BALL */
-.ball{
-  position:absolute;
-  width:12px;
-  height:12px;
-  background:red;
-  border-radius:50%;
-  top:60%;
-  left:-50px;
-  animation:swing 4s linear infinite;
-}
-@keyframes swing{
-  0%{left:-50px}
-  100%{left:110%}
-}
+.meta{opacity:.7;margin-top:10px}
 
 /* TEAMS */
 .teams{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  padding:40px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:25px;
+  padding:30px;
 }
 
+/* BASE TEAM CARD */
 .team{
-  background:rgba(0,0,0,0.6);
+  border-radius:20px;
   padding:20px;
-  border-radius:12px;
-  text-align:center;
-  transition:.3s;
-}
-.team:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(34,197,94,0.5);
+  position:relative;
+  overflow:hidden;
+  transition:.4s;
 }
 
-.captain-name{
+/* GLOW */
+.team:hover{
+  transform:translateY(-10px) scale(1.02);
+}
+
+/* TEAM COLORS */
+
+/* TEAM A - GOLD + BLACK */
+.team-a{
+  background:linear-gradient(135deg,#000,#1f1f1f);
+  border:2px solid gold;
+}
+.team-a:hover{box-shadow:0 0 30px gold}
+
+/* TEAM B - BLUE */
+.team-b{
+  background:linear-gradient(135deg,#0f172a,#1e3a8a);
+  border:2px solid #3b82f6;
+}
+.team-b:hover{box-shadow:0 0 30px #3b82f6}
+
+/* TEAM C - PURPLE */
+.team-c{
+  background:linear-gradient(135deg,#1e1b4b,#6d28d9);
+  border:2px solid #a855f7;
+}
+.team-c:hover{box-shadow:0 0 30px #a855f7}
+
+/* TEAM D - RED */
+.team-d{
+  background:linear-gradient(135deg,#3f0a0a,#dc2626);
+  border:2px solid #ef4444;
+}
+.team-d:hover{box-shadow:0 0 30px #ef4444}
+
+/* HEADER */
+.team h2{
+  margin-bottom:5px;
+}
+
+/* CAPTAIN */
+.captain{
+  font-weight:700;
   color:#facc15;
-  font-weight:600;
+  margin-bottom:15px;
+}
+
+/* PLAYER GRID */
+.players{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.player{
+  padding:8px;
+  background:rgba(255,255,255,0.08);
+  border-radius:8px;
+  font-size:0.9rem;
 }
 
 /* VENUE */
 .venue{
-  padding:40px 20px;
+  padding:40px;
   text-align:center;
 }
 
-.venue-card{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  max-width:1000px;
-  margin:auto;
-  background:rgba(0,0,0,0.6);
-  border-radius:12px;
-  overflow:hidden;
-}
-
-.venue-info{
-  flex:1;
-  padding:20px;
-  text-align:left;
-}
-
-.map{
-  flex:1;
-  min-height:250px;
-}
-
-.map iframe{
+iframe{
   width:100%;
-  height:100%;
+  height:300px;
   border:none;
-}
-
-.map-btn{
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 15px;
-  background:#22c55e;
-  color:black;
-  border-radius:20px;
-  text-decoration:none;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:20px;
-  opacity:.6;
+  border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="ball"></div>
-
 <div class="header">
   <img src="assets/org-logo.webp" class="logo">
-  <h2>GPL 🏏 LIVE</h2>
+  <h2>GPL 🏏</h2>
 </div>
 
-<div class="info">
-  <h1>📢 Captain Announcement</h1>
-  <div class="meta">
-    <span>📅 4th April 2026</span>
-    <span>📍 LBW Turf</span>
-    <span>🕟 4:30 PM onwards</span>
-  </div>
-</div>
-
-<div class="trophy">🏆</div>
-
-<div class="captains">
-  <div id="c1" class="captain">Mili</div>
-  <div id="c2" class="captain">Isha Mishra</div>
-  <div id="c3" class="captain">Riya</div>
-  <div id="c4" class="captain">Surbhi Baghel</div>
-</div>
+<section class="hero">
+  <h1>🏏 GPL Tournament 2026</h1>
+  <p class="meta">📅 4th April 2026 | 📍 LBW Turf | 🕟 4:30 PM onwards</p>
+</section>
 
 <section class="teams">
-  <div class="team"><h3>Team A</h3><p class="captain-name">👑 Mili</p></div>
-  <div class="team"><h3>Team B</h3><p class="captain-name">👑 Isha Mishra</p></div>
-  <div class="team"><h3>Team C</h3><p class="captain-name">👑 Riya</p></div>
-  <div class="team"><h3>Team D</h3><p class="captain-name">👑 Surbhi Baghel</p></div>
+
+  <!-- TEAM A -->
+  <div class="team team-a">
+    <h2>Team A</h2>
+    <div class="captain">👑 Mili</div>
+    <div class="players">
+      <div class="player">Mohak</div>
+      <div class="player">Harsh</div>
+      <div class="player">Alok</div>
+      <div class="player">Krishna Soni</div>
+      <div class="player">Palak</div>
+      <div class="player">Deepak</div>
+      <div class="player">Kapil</div>
+    </div>
+  </div>
+
+  <!-- TEAM B -->
+  <div class="team team-b">
+    <h2>Team B</h2>
+    <div class="captain">👑 Isha Mishra</div>
+    <div class="players">
+      <div class="player">Ashish</div>
+      <div class="player">Vasu</div>
+      <div class="player">Prakhar</div>
+      <div class="player">Khushi</div>
+      <div class="player">Sanskar</div>
+      <div class="player">Ritansh</div>
+      <div class="player">Manish Bhaiya</div>
+    </div>
+  </div>
+
+  <!-- TEAM C -->
+  <div class="team team-c">
+    <h2>Team C</h2>
+    <div class="captain">👑 Riya</div>
+    <div class="players">
+      <div class="player">Yogesh</div>
+      <div class="player">Rahul</div>
+      <div class="player">Anshul</div>
+      <div class="player">Satyam</div>
+      <div class="player">Shivam</div>
+      <div class="player">Swati</div>
+      <div class="player">Arpit</div>
+    </div>
+  </div>
+
+  <!-- TEAM D -->
+  <div class="team team-d">
+    <h2>Team D</h2>
+    <div class="captain">👑 Surbhi Baghel</div>
+    <div class="players">
+      <div class="player">Aman</div>
+      <div class="player">Surbhi Nikam</div>
+      <div class="player">Vikas</div>
+      <div class="player">Pranjal</div>
+      <div class="player">Paras</div>
+      <div class="player">Harshit</div>
+      <div class="player">Prasanna</div>
+    </div>
+  </div>
+
 </section>
 
 <section class="venue">
   <h2>📍 Venue</h2>
-  <div class="venue-card">
-    <div class="venue-info">
-      <h3>LBW Turf</h3>
-      <p>Indore</p>
-      <p>4th April 2026</p>
-      <p>4:30 PM onwards</p>
-      <a href="https://maps.app.goo.gl/VNMQubrV79LPWkks6?g_st=aw" target="_blank" class="map-btn">
-        Open in Maps →
-      </a>
-    </div>
-
-    <div class="map">
-      <iframe src="https://www.google.com/maps?q=LBW+Turf+Indore&output=embed"></iframe>
-    </div>
-  </div>
+  <p>LBW Turf, Indore</p>
+  <iframe src="https://www.google.com/maps?q=LBW+Turf+Indore&output=embed"></iframe>
 </section>
-
-<footer>
-  © GPL 2026 | Golden Eagle
-</footer>
-
-<audio id="cheer" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b1e1b.mp3"></audio>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-<script>
-const ids=["c1","c2","c3","c4"];
-
-ids.forEach((id,i)=>{
-  setTimeout(()=>{
-    const el=document.getElementById(id);
-    el.classList.add("show","glow");
-  },800*i);
-});
-
-setTimeout(()=>{
-  confetti({particleCount:300,spread:150});
-  document.getElementById("cheer").play();
-},3000);
-</script>
 
 </body>
 </html>
