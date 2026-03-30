@@ -16,7 +16,6 @@ body{
   background:
     radial-gradient(circle at top, rgba(255,255,255,0.08), transparent),
     linear-gradient(to bottom,#0a2e0a,#021802);
-  overflow-x:hidden;
 }
 
 /* HEADER */
@@ -27,7 +26,9 @@ body{
   padding:15px 25px;
   background:rgba(0,0,0,0.6);
 }
-.logo{height:40px}
+.logo{
+  height:40px;
+}
 
 /* HERO */
 .hero{
@@ -48,32 +49,19 @@ body{
 .team{
   border-radius:20px;
   padding:20px;
-  position:relative;
-  overflow:hidden;
-  backdrop-filter:blur(8px);
-  animation:fadeUp .8s ease forwards;
-  opacity:0;
+  backdrop-filter:blur(10px);
+  transition:.3s;
 }
 
-/* ENTRY ANIMATION */
-@keyframes fadeUp{
-  to{opacity:1;transform:translateY(0)}
-}
-.team:nth-child(1){animation-delay:.1s}
-.team:nth-child(2){animation-delay:.2s}
-.team:nth-child(3){animation-delay:.3s}
-.team:nth-child(4){animation-delay:.4s}
-
-/* TEAM COLORS */
+/* COLORS */
 .team-a{background:linear-gradient(#000,#1f1f1f);border:2px solid gold}
 .team-b{background:linear-gradient(#0f172a,#1e3a8a);border:2px solid #3b82f6}
 .team-c{background:linear-gradient(#1e1b4b,#6d28d9);border:2px solid #a855f7}
 .team-d{background:linear-gradient(#3f0a0a,#dc2626);border:2px solid #ef4444}
 
-/* HOVER */
 .team:hover{
-  transform:translateY(-10px) scale(1.02);
-  box-shadow:0 0 30px rgba(255,255,255,0.2);
+  transform:translateY(-8px);
+  box-shadow:0 0 25px rgba(255,255,255,0.2);
 }
 
 /* CAPTAIN */
@@ -83,14 +71,13 @@ body{
   margin-bottom:15px;
 }
 
-/* PLAYERS GRID */
+/* PLAYERS */
 .players{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
 
-/* PLAYER CHIP */
 .player{
   display:flex;
   align-items:center;
@@ -122,14 +109,13 @@ body{
 .map{
   max-width:500px;
   margin:15px auto;
-  border-radius:10px;
-  overflow:hidden;
 }
 
 iframe{
   width:100%;
   height:200px;
   border:none;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -150,53 +136,62 @@ iframe{
 
 <!-- TEAM A -->
 <div class="team team-a">
-  <h2>Team A</h2>
-  <div class="captain">👑 Mili</div>
-  <div class="players">
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Mohak</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Harsh</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Alok</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Krishna</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Palak</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Deepak</div>
-  </div>
+<h2>Team A</h2>
+<div class="captain">👑 Mili</div>
+<div class="players">
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Mohak</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Harsh</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Alok</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Krishna Soni</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Palak</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Deepak</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Kapil</div>
+</div>
 </div>
 
 <!-- TEAM B -->
 <div class="team team-b">
-  <h2>Team B</h2>
-  <div class="captain">👑 Isha Mishra</div>
-  <div class="players">
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Ashish</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vasu</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Prakhar</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Khushi</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Sanskar</div>
-  </div>
+<h2>Team B</h2>
+<div class="captain">👑 Isha Mishra</div>
+<div class="players">
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Ashish</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vasu</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Prakhar</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Khushi</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Sanskar</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Ritansh</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Manish Bhaiya</div>
+</div>
 </div>
 
 <!-- TEAM C -->
 <div class="team team-c">
-  <h2>Team C</h2>
-  <div class="captain">👑 Riya</div>
-  <div class="players">
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Yogesh</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Rahul</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Anshul</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Satyam</div>
-  </div>
+<h2>Team C</h2>
+<div class="captain">👑 Riya</div>
+<div class="players">
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Yogesh</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Rahul</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Anshul</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Satyam</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Shivam</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Swati</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Arpit</div>
+</div>
 </div>
 
 <!-- TEAM D -->
 <div class="team team-d">
-  <h2>Team D</h2>
-  <div class="captain">👑 Surbhi Baghel</div>
-  <div class="players">
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Aman</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vikas</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Pranjal</div>
-    <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Paras</div>
-  </div>
+<h2>Team D</h2>
+<div class="captain">👑 Surbhi Baghel</div>
+<div class="players">
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Aman</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Surbhi Nikam</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vikas</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Pranjal</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Paras</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Harshit</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Prasanna</div>
+</div>
 </div>
 
 </section>
