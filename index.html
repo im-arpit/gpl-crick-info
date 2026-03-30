@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GPL 2026 Teams</title>
+<title>GPL 2026</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -13,162 +13,88 @@
 body{
   font-family:'Poppins',sans-serif;
   color:white;
-  background:
-    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent),
-    linear-gradient(to bottom,#0a2e0a,#021802);
+  background:linear-gradient(to bottom,#0a2e0a,#021802);
 }
 
 /* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:15px 25px;
   background:rgba(0,0,0,0.6);
 }
-.logo{
-  height:40px;
-}
+.logo{height:40px}
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:30px;
-}
+.hero{text-align:center;padding:30px}
 .meta{opacity:.8;margin-top:8px}
 
 /* TEAMS */
 .teams{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:25px;
+  gap:20px;
   padding:25px;
 }
 
-/* TEAM CARD */
 .team{
-  border-radius:20px;
+  border-radius:15px;
   padding:20px;
   backdrop-filter:blur(10px);
   transition:.3s;
 }
 
-/* COLORS */
-.team-a{background:linear-gradient(#000,#1f1f1f);border:2px solid gold}
-.team-b{background:linear-gradient(#0f172a,#1e3a8a);border:2px solid #3b82f6}
-.team-c{background:linear-gradient(#1e1b4b,#6d28d9);border:2px solid #a855f7}
-.team-d{background:linear-gradient(#3f0a0a,#dc2626);border:2px solid #ef4444}
+.team-a{background:#111;border:2px solid gold}
+.team-b{background:#1e3a8a}
+.team-c{background:#6d28d9}
+.team-d{background:#dc2626}
 
 .team:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 25px rgba(255,255,255,0.2);
+  transform:translateY(-6px);
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
 }
 
-/* CAPTAIN */
 .captain{
-  font-weight:700;
   color:#facc15;
-  margin-bottom:15px;
+  font-weight:700;
+  margin-bottom:10px;
 }
 
-/* PLAYERS */
 .players{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:8px;
 }
 
 .player{
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:8px;
+  gap:6px;
+  padding:6px;
   background:rgba(255,255,255,0.08);
-  border-radius:12px;
-  transition:.3s;
+  border-radius:10px;
+  font-size:0.85rem;
 }
 
 .player img{
-  width:26px;
-  height:26px;
-  border-radius:50%;
+  width:22px;height:22px;border-radius:50%;
 }
 
-.player:hover{
-  background:#22c55e;
-  color:black;
-  transform:scale(1.05);
+/* ===== FIXED BOTTOM SECTION ===== */
+
+.bottom{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  padding:25px;
 }
 
-/* VENUE */
-.venue{
-  text-align:center;
+/* FIXTURES */
+.fixtures, .venue{
+  background:rgba(0,0,0,0.5);
+  border-radius:15px;
   padding:20px;
-}
-
-.map{
-  max-width:500px;
-  margin:15px auto;
-}
-
-iframe{
-  width:100%;
-  height:200px;
-  border:none;
-  border-radius:10px;
-}
-/* FIXTURES */
-.fixtures{
-  padding:30px;
-  text-align:center;
-}
-
-.fixture-group{
-  margin-top:20px;
-}
-
-.match-card{
-  margin:10px auto;
-  padding:12px;
-  max-width:400px;
-  border-radius:10px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.1);
-  transition:.3s;
-}
-
-.match-card:hover{
-  transform:scale(1.05);
-  background:#22c55e;
-  color:black;
-}
-
-/* SPECIAL */
-.highlight{
-  border:1px solid #facc15;
-}
-
-.final{
-  border:2px solid gold;
-  background:linear-gradient(#111,#333);
-  color:#facc15;
-  font-weight:700;
-}
-  /* SIDE BY SIDE SECTION */
-.bottom-section{
-  display:flex;
-  gap:30px;
-  padding:30px;
-  align-items:flex-start;
-}
-
-/* FIXTURES */
-.fixtures{
-  flex:1;
-}
-
-.fixture-group{
-  margin-top:15px;
+  height:100%;
 }
 
 .match-card{
@@ -177,16 +103,16 @@ iframe{
   border-radius:10px;
   background:rgba(255,255,255,0.08);
   border:1px solid rgba(255,255,255,0.1);
+  text-align:center;
   transition:.3s;
 }
 
 .match-card:hover{
-  transform:scale(1.03);
   background:#22c55e;
   color:black;
+  transform:scale(1.03);
 }
 
-/* SPECIAL */
 .highlight{
   border:1px solid #facc15;
 }
@@ -196,27 +122,23 @@ iframe{
   color:#facc15;
 }
 
-/* VENUE */
-.venue{
-  flex:1;
-  text-align:center;
-}
-
+/* MAP FIX */
 .map{
   margin-top:10px;
+  height:300px;
 }
 
-iframe{
+.map iframe{
   width:100%;
-  height:250px;
+  height:100%;
   border:none;
   border-radius:10px;
 }
 
 /* RESPONSIVE */
 @media(max-width:768px){
-  .bottom-section{
-    flex-direction:column;
+  .bottom{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -236,24 +158,22 @@ iframe{
 
 <section class="teams">
 
-<!-- TEAM A -->
 <div class="team team-a">
-<h2>Team A</h2>
+<h3>Team A</h3>
 <div class="captain">👑 Mili</div>
 <div class="players">
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Mohak</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Harsh</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Vikas</div>
-<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Krishna Soni</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Krishna</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Palak</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Deepak</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Kapil</div>
 </div>
 </div>
 
-<!-- TEAM B -->
 <div class="team team-b">
-<h2>Team B</h2>
+<h3>Team B</h3>
 <div class="captain">👑 Isha Mishra</div>
 <div class="players">
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Ashish</div>
@@ -262,13 +182,12 @@ iframe{
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Khushi</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Sanskar</div>
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Ritansh</div>
-<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Manish Bhaiya</div>
+<div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Manish</div>
 </div>
 </div>
 
-<!-- TEAM C -->
 <div class="team team-c">
-<h2>Team C</h2>
+<h3>Team C</h3>
 <div class="captain">👑 Riya</div>
 <div class="players">
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Yogesh</div>
@@ -281,9 +200,8 @@ iframe{
 </div>
 </div>
 
-<!-- TEAM D -->
 <div class="team team-d">
-<h2>Team D</h2>
+<h3>Team D</h3>
 <div class="captain">👑 Surbhi Baghel</div>
 <div class="players">
 <div class="player"><img src="https://cdn-icons-png.flaticon.com/512/149/149071.png">Aman</div>
@@ -298,37 +216,29 @@ iframe{
 
 </section>
 
-<section class="bottom-section">
+<!-- FIXED SIDE-BY-SIDE -->
+<section class="bottom">
 
-  <!-- FIXTURES -->
-  <div class="fixtures">
-    <h2>🏏 Match Fixtures</h2>
+<div class="fixtures">
+<h2>🏏 Match Fixtures</h2>
 
-    <div class="fixture-group">
-      <h3>League Matches</h3>
+<div class="match-card">Match 1: Team A vs Team B</div>
+<div class="match-card">Match 2: Team C vs Team D</div>
+<div class="match-card">Match 3: Team A vs Team C</div>
+<div class="match-card">Match 4: Team B vs Team D</div>
 
-      <div class="match-card">Match 1: Team A vs Team B</div>
-      <div class="match-card">Match 2: Team C vs Team D</div>
-      <div class="match-card">Match 3: Team A vs Team C</div>
-      <div class="match-card">Match 4: Team B vs Team D</div>
-    </div>
+<h3 style="margin-top:15px">Knockouts</h3>
+<div class="match-card highlight">Semi Final 1: Rank 1 vs Rank 2</div>
+<div class="match-card highlight">Semi Final 2: Loser SF1 vs Rank 3</div>
+<div class="match-card final">🏆 Final: Winner SF1 vs Winner SF2</div>
+</div>
 
-    <div class="fixture-group">
-      <h3>Knockouts</h3>
-
-      <div class="match-card highlight">Semi Final 1: Rank 1 vs Rank 2</div>
-      <div class="match-card highlight">Semi Final 2: Loser SF1 vs Rank 3</div>
-      <div class="match-card final">🏆 Final: Winner SF1 vs Winner SF2</div>
-    </div>
-  </div>
-
-  <!-- VENUE -->
-  <div class="venue">
-    <h2>📍 Venue</h2>
-    <div class="map">
-      <iframe src="https://www.google.com/maps?q=LBW+Turf+Indore&output=embed"></iframe>
-    </div>
-  </div>
+<div class="venue">
+<h2>📍 Venue</h2>
+<div class="map">
+<iframe src="https://www.google.com/maps?q=LBW+Turf+Indore&output=embed"></iframe>
+</div>
+</div>
 
 </section>
 
