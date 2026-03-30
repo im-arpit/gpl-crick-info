@@ -117,6 +117,43 @@ iframe{
   border:none;
   border-radius:10px;
 }
+/* FIXTURES */
+.fixtures{
+  padding:30px;
+  text-align:center;
+}
+
+.fixture-group{
+  margin-top:20px;
+}
+
+.match-card{
+  margin:10px auto;
+  padding:12px;
+  max-width:400px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  transition:.3s;
+}
+
+.match-card:hover{
+  transform:scale(1.05);
+  background:#22c55e;
+  color:black;
+}
+
+/* SPECIAL */
+.highlight{
+  border:1px solid #facc15;
+}
+
+.final{
+  border:2px solid gold;
+  background:linear-gradient(#111,#333);
+  color:#facc15;
+  font-weight:700;
+}
 </style>
 </head>
 
@@ -194,6 +231,27 @@ iframe{
 </div>
 </div>
 
+</section>
+
+<section class="fixtures">
+  <h2>🏏 Match Fixtures</h2>
+
+  <div class="fixture-group">
+    <h3>League Matches</h3>
+
+    <div class="match-card">Match 1: Team A vs Team B</div>
+    <div class="match-card">Match 2: Team C vs Team D</div>
+    <div class="match-card">Match 3: Team A vs Team C</div>
+    <div class="match-card">Match 4: Team B vs Team D</div>
+  </div>
+
+  <div class="fixture-group">
+    <h3>Knockouts</h3>
+
+    <div class="match-card highlight">Semi Final 1: Rank 1 vs Rank 2</div>
+    <div class="match-card highlight">Semi Final 2: Loser SF1 vs Rank 3</div>
+    <div class="match-card final">🏆 Final: Winner SF1 vs Winner SF2</div>
+  </div>
 </section>
 
 <section class="venue">
