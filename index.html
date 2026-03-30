@@ -24,16 +24,16 @@ body::before{
   width:200%;
   height:200%;
   background:
-    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(circle at center, rgba(255,255,255,0.1), transparent),
     radial-gradient(circle at 20% 80%, rgba(34,197,94,0.2), transparent),
     radial-gradient(circle at 80% 30%, rgba(59,130,246,0.2), transparent);
-  animation:moveBg 12s infinite alternate;
+  animation:moveBg 10s infinite alternate;
   z-index:-1;
 }
 
 @keyframes moveBg{
   0%{transform:translate(0,0)}
-  100%{transform:translate(-80px,-80px)}
+  100%{transform:translate(-100px,-100px)}
 }
 
 /* NAVBAR */
@@ -43,111 +43,63 @@ nav{
   display:flex;
   justify-content:space-between;
   padding:15px 30px;
-  backdrop-filter:blur(10px);
   background:rgba(2,6,23,0.8);
-  z-index:100;
-}
-
-nav ul{
-  display:flex;
-  gap:20px;
-  list-style:none;
+  backdrop-filter:blur(10px);
 }
 
 nav a{
   color:white;
   text-decoration:none;
-  transition:.3s;
+  margin-left:20px;
 }
 nav a:hover{color:#22c55e}
 
 /* HERO */
 .hero{text-align:center;padding:60px 20px}
-.hero h1{font-size:3rem;font-weight:700}
+.hero h1{font-size:3rem}
 .highlight{color:#22c55e}
 
-/* FORM */
-.form-container{
-  max-width:520px;
-  margin:auto;
-  padding:30px;
-  border-radius:15px;
-  backdrop-filter:blur(15px);
+/* ANNOUNCEMENT */
+.announcement{
+  text-align:center;
+  padding:50px 20px;
+}
+
+.captain-card{
+  display:inline-block;
+  margin:20px;
+  padding:25px 35px;
+  border-radius:20px;
   background:rgba(255,255,255,0.05);
-  box-shadow:0 0 40px rgba(34,197,94,0.2);
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 40px rgba(255,215,0,0.5);
+  animation:pop 1s ease;
 }
 
-input,textarea{
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:none;
-  border-radius:8px;
-  background:#1e293b;
-  color:white;
+@keyframes pop{
+  0%{transform:scale(0.5);opacity:0}
+  100%{transform:scale(1);opacity:1}
 }
 
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:30px;
-  background:#22c55e;
-  font-weight:600;
-  cursor:pointer;
+.captain-name{
+  font-size:1.8rem;
+  font-weight:700;
+  color:#facc15;
 }
 
-/* SECTION */
-.section{text-align:center;padding:60px 20px}
-
-/* LEADERBOARD */
-.leaderboard{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  max-width:1000px;
-  margin:auto;
-}
-
-.card{
-  padding:20px;
-  border-radius:15px;
-  backdrop-filter:blur(12px);
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.1);
-  transition:.4s;
-}
-
-.card:hover{
-  transform:translateY(-10px) scale(1.03);
-  box-shadow:0 0 35px rgba(34,197,94,0.6);
-}
-
-/* PODIUM */
-.rank-1{border:2px solid gold;box-shadow:0 0 30px gold}
-.rank-2{border:2px solid silver}
-.rank-3{border:2px solid #cd7f32}
-
-/* PROGRESS */
-.bar{
-  height:6px;
-  background:#1e293b;
-  border-radius:10px;
-  margin-top:10px;
-}
-.fill{
-  height:100%;
-  background:#22c55e;
-  border-radius:10px;
-  transition:1s;
+.tie{
+  margin-top:20px;
+  color:#94a3b8;
 }
 
 /* TEAMS */
+.section{text-align:center;padding:60px 20px}
+
 .teams{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:20px;
-  max-width:1100px;
+  max-width:1000px;
   margin:auto;
 }
 
@@ -155,29 +107,34 @@ button{
   padding:20px;
   border-radius:15px;
   background:rgba(255,255,255,0.05);
-}
-
-.team h3{color:#22c55e}
-
-.captain{
-  color:#facc15;
-  font-weight:600;
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:30px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#22c55e;
-  color:black;
-  padding:10px;
-  border-radius:6px;
-  opacity:0;
+  backdrop-filter:blur(10px);
   transition:.3s;
 }
-.toast.show{opacity:1}
+
+.team:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 30px rgba(34,197,94,0.4);
+}
+
+.team h3{
+  color:#22c55e;
+}
+
+.captain{
+  margin-top:10px;
+  font-weight:600;
+  color:#facc15;
+}
+
+/* CONFETTI FEEL */
+.glow{
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 20px gold}
+  to{box-shadow:0 0 40px gold}
+}
 </style>
 </head>
 
@@ -185,118 +142,63 @@ button{
 
 <nav>
   <h2>GPL 🏏</h2>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#leaderboard">Leaderboard</a></li>
-    <li><a href="#teams">Teams</a></li>
-  </ul>
+  <div>
+    <a href="#home">Home</a>
+    <a href="#teams">Teams</a>
+  </div>
 </nav>
 
 <section id="home" class="hero">
-  <h1>GPL Tournament 2026</h1>
-  <p class="highlight">Captains will be girls</p>
+  <h1>GPL Tournament 2026 🏏</h1>
+  <p class="highlight">Captains Announcement</p>
 </section>
 
-<form class="form-container" id="form">
-  <input name="nominee_name" placeholder="Nominee Name" required>
-  <input name="email" type="email" placeholder="Email" required>
-  <textarea name="reason"></textarea>
-  <input name="your_name" placeholder="Your Name">
-  <button>Submit</button>
-</form>
+<!-- ANNOUNCEMENT -->
+<section class="announcement">
+  <h2>🏆 Confirmed Captains</h2>
 
-<section id="leaderboard" class="section">
-  <h2>🏆 Leaderboard</h2>
-  <div class="leaderboard" id="board"></div>
-</section>
+  <div class="captain-card glow">
+    <div class="captain-name">Mili</div>
+  </div>
 
-<section id="teams" class="section">
-  <h2>🏏 Teams</h2>
-  <div class="teams">
-    <div class="team"><h3>Team A</h3><div class="captain">Captain TBD</div></div>
-    <div class="team"><h3>Team B</h3><div class="captain">Captain TBD</div></div>
-    <div class="team"><h3>Team C</h3><div class="captain">Captain TBD</div></div>
-    <div class="team"><h3>Team D</h3><div class="captain">Captain TBD</div></div>
+  <div class="captain-card glow">
+    <div class="captain-name">Isha Mishra</div>
+  </div>
+
+  <div class="tie">
+    Surbhi Baghel, Palak, Riya and Khushi have equal votes (4 each).  
+    Final decision will be announced soon.
   </div>
 </section>
 
-<div class="toast" id="toast">Submitted 🎉</div>
+<!-- TEAMS -->
+<section id="teams" class="section">
+  <h2>🏏 Teams</h2>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <div class="teams">
 
-<script>
-const API="https://script.google.com/macros/s/AKfycbyxESmYTw131TQQWpBix3t_rhyzesIZqAYhJqxeMB9bp9Z6kYP_2wYkNHqkniEVPPdapA/exec";
+    <div class="team">
+      <h3>Team A</h3>
+      <div class="captain">👑 Captain: Mili</div>
+    </div>
 
-const form=document.getElementById("form");
+    <div class="team">
+      <h3>Team B</h3>
+      <div class="captain">👑 Captain: Isha Mishra</div>
+    </div>
 
-form.addEventListener("submit",async(e)=>{
-  e.preventDefault();
+    <div class="team">
+      <h3>Team C</h3>
+      <div class="captain">Captain TBD</div>
+    </div>
 
-  const data={
-    nominee_name:form.nominee_name.value,
-    email:form.email.value,
-    reason:form.reason.value,
-    your_name:form.your_name.value
-  };
+    <div class="team">
+      <h3>Team D</h3>
+      <div class="captain">Captain TBD</div>
+    </div>
 
-  await fetch(API,{method:"POST",body:JSON.stringify(data)});
-
-  showToast();
-  confettiBurst();
-  form.reset();
-  load();
-});
-
-async function load(){
-  const res=await fetch(API);
-  const data=await res.json();
-
-  const count={};
-  data.forEach(d=>{
-    count[d.nominee_name]=(count[d.nominee_name]||0)+1;
-  });
-
-  const sorted=Object.entries(count).sort((a,b)=>b[1]-a[1]);
-
-  const max=sorted[0]?.[1]||1;
-
-  const board=document.getElementById("board");
-  board.innerHTML="";
-
-  sorted.forEach((i,idx)=>{
-    const percent=(i[1]/max)*100;
-
-    const div=document.createElement("div");
-    div.className=`card rank-${idx+1}`;
-
-    div.innerHTML=`
-      <h3>#${idx+1} ${i[0]}</h3>
-      <p>${i[1]} votes</p>
-      <div class="bar"><div class="fill" style="width:${percent}%"></div></div>
-    `;
-
-    board.appendChild(div);
-  });
-}
-
-setInterval(load,5000);
-load();
-
-function showToast(){
-  const t=document.getElementById("toast");
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),3000);
-}
-
-function confettiBurst(){
-  const duration=2000;
-  const end=Date.now()+duration;
-  (function frame(){
-    confetti({particleCount:12,spread:100,origin:{y:0.6}});
-    if(Date.now()<end) requestAnimationFrame(frame);
-  })();
-}
-</script>
+  </div>
+</section>
 
 </body>
 </html>
