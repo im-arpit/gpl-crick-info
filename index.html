@@ -12,68 +12,45 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background:#020617;
   color:white;
   overflow:hidden;
+
+  /* STADIUM FIELD */
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,0.6), transparent),
+    linear-gradient(to bottom, #0f3d0f, #021a02);
 }
 
-/* CINEMATIC OVERLAY */
-.intro{
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:999;
-  animation:fadeOut 2s ease forwards;
-  animation-delay:2s;
-}
-
-.intro h1{
-  font-size:2rem;
-  letter-spacing:3px;
-  animation:zoomIn 2s ease;
-}
-
-@keyframes zoomIn{
-  from{opacity:0;transform:scale(0.5)}
-  to{opacity:1;transform:scale(1)}
-}
-
-@keyframes fadeOut{
-  to{opacity:0;visibility:hidden}
-}
-
-/* STADIUM LIGHT SWEEP */
-.light{
+/* FLOOD LIGHT EFFECT */
+body::before{
+  content:"";
   position:fixed;
   width:200%;
   height:200%;
-  background:radial-gradient(circle, rgba(255,255,255,0.08), transparent);
-  animation:moveLight 8s infinite linear;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent),
+    radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08), transparent);
+  animation:lightMove 8s infinite alternate;
   z-index:-1;
 }
 
-@keyframes moveLight{
-  0%{transform:translate(-50%,-50%)}
-  100%{transform:translate(0,0)}
+@keyframes lightMove{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-40px)}
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
   display:flex;
   justify-content:space-between;
-  padding:15px 30px;
+  padding:15px 25px;
 }
 
 .logo{
   height:40px;
   animation:float 4s infinite;
 }
-
 @keyframes float{
   50%{transform:translateY(-5px)}
 }
@@ -81,23 +58,30 @@ nav{
 /* HERO */
 .hero{
   text-align:center;
-  padding:60px 20px;
-}
-
-/* CAPTAIN REVEAL */
-.reveal{
-  text-align:center;
   margin-top:40px;
 }
 
-.captain{
-  font-size:2rem;
-  margin:20px;
+/* TROPHY */
+.trophy{
+  font-size:60px;
+  margin-top:20px;
+  animation:drop 1.5s ease forwards;
   opacity:0;
-  transform:translateY(50px);
 }
 
-/* reveal animation */
+@keyframes drop{
+  0%{transform:translateY(-200px);opacity:0}
+  100%{transform:translateY(0);opacity:1}
+}
+
+/* CAPTAINS */
+.captain{
+  font-size:2.2rem;
+  margin:20px;
+  opacity:0;
+  transform:translateY(40px);
+}
+
 .show{
   animation:reveal 1s forwards;
 }
@@ -106,10 +90,26 @@ nav{
   to{opacity:1;transform:translateY(0)}
 }
 
-/* glow */
 .glow{
   color:#facc15;
-  text-shadow:0 0 20px gold;
+  text-shadow:0 0 25px gold;
+}
+
+/* BALL ANIMATION */
+.ball{
+  position:fixed;
+  width:14px;
+  height:14px;
+  background:red;
+  border-radius:50%;
+  top:60%;
+  left:-20px;
+  animation:ballMove 6s linear infinite;
+}
+
+@keyframes ballMove{
+  0%{left:-20px}
+  100%{left:110%}
 }
 
 /* TEAMS */
@@ -121,28 +121,35 @@ nav{
 }
 
 .team{
-  background:rgba(255,255,255,0.05);
+  background:rgba(0,0,0,0.4);
+  border:1px solid rgba(255,255,255,0.1);
   padding:20px;
   border-radius:10px;
   text-align:center;
+  transition:.3s;
 }
 
-/* HIDE SCROLL INITIALLY */
-.hidden{
-  overflow:hidden;
+.team:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(34,197,94,0.5);
+}
+
+.captain-name{
+  color:#facc15;
+  font-weight:600;
+}
+
+/* TIE TEXT */
+.tie{
+  margin-top:10px;
+  opacity:.8;
 }
 </style>
 </head>
 
-<body class="hidden">
+<body>
 
-<!-- INTRO -->
-<div class="intro">
-  <h1>GPL 2026</h1>
-  <p>Captain Reveal</p>
-</div>
-
-<div class="light"></div>
+<div class="ball"></div>
 
 <nav>
   <img src="assets/org-logo.webp" class="logo">
@@ -150,53 +157,62 @@ nav{
 </nav>
 
 <section class="hero">
-  <h1>Captain Announcement</h1>
+  <h1>🏏 Captain Announcement</h1>
 
-  <div class="reveal">
-    <div id="c1" class="captain">Mili</div>
-    <div id="c2" class="captain">Isha Mishra</div>
-  </div>
+  <div class="trophy">🏆</div>
 
-  <p style="margin-top:20px;opacity:.7">
-    Surbhi Baghel, Palak, Riya and Khushi are tied (4 votes each).  
-    Final decision soon.
+  <div id="c1" class="captain">Mili</div>
+  <div id="c2" class="captain">Isha Mishra</div>
+
+  <p class="tie">
+    Surbhi Baghel, Palak, Riya and Khushi tied (4 votes each). Final soon.
   </p>
 </section>
 
 <section class="teams">
-  <div class="team"><h3>Team A</h3><p class="glow">👑 Mili</p></div>
-  <div class="team"><h3>Team B</h3><p class="glow">👑 Isha Mishra</p></div>
-  <div class="team"><h3>Team C</h3><p>Captain TBD</p></div>
-  <div class="team"><h3>Team D</h3><p>Captain TBD</p></div>
+  <div class="team">
+    <h3>Team A</h3>
+    <p class="captain-name">👑 Mili Neema</p>
+  </div>
+
+  <div class="team">
+    <h3>Team B</h3>
+    <p class="captain-name">👑 Isha Mishra</p>
+  </div>
+
+  <div class="team">
+    <h3>Team C</h3>
+    <p>Captain TBD</p>
+  </div>
+
+  <div class="team">
+    <h3>Team D</h3>
+    <p>Captain TBD</p>
+  </div>
 </section>
+
+<!-- SOUND -->
+<audio id="cheer" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_115b9b1e1b.mp3?filename=cheering-6896.mp3"></audio>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
 setTimeout(()=>{
-  document.body.classList.remove("hidden");
-
   const c1=document.getElementById("c1");
   const c2=document.getElementById("c2");
 
-  setTimeout(()=>{
-    c1.classList.add("show","glow");
-  },500);
+  c1.classList.add("show","glow");
 
   setTimeout(()=>{
     c2.classList.add("show","glow");
-  },1500);
+  },1000);
 
-  // confetti finale
   setTimeout(()=>{
-    confetti({
-      particleCount:150,
-      spread:120,
-      origin:{y:0.6}
-    });
-  },2500);
+    confetti({particleCount:200,spread:120});
+    document.getElementById("cheer").play();
+  },2000);
 
-},2000);
+},1000);
 </script>
 
 </body>
